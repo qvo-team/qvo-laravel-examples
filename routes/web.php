@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'CheckoutController@show');
+Route::view('/', 'home');
 
 Route::get('/checkout', 'CheckoutController@show');
 Route::get('/checkout/register_transaction/{transaction_id}', 'CheckoutController@register_transaction');
