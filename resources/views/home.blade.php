@@ -18,7 +18,7 @@
         <div class="example-option">
           <h3 class="title">Planes y suscripciones</h3>
           <p class="lead">Crea planes de suscripción y recibe pagos automáticos con tarjetas de crédito.</p>
-          <a class="btn btn-primary" href="/subscriptions">Ver ejemplo</a>
+          <a class="btn btn-primary" href="/subscription">Ver ejemplo</a>
         </div>
         <div class="example-option">
           <h3 class="title">Botón de pago y Checkout</h3>
