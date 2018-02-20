@@ -89,7 +89,7 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ'; // Reemplazar por el token de producció
     return json_decode($body);
   }
 
-  private function cardInscriptionReturn(Request $request)
+  public function cardInscriptionReturn(Request $request)
   {
     $uid = $request['uid'];
     $qvoCustomerID = $request['qvo_customer_id'];
@@ -99,10 +99,11 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ'; // Reemplazar por el token de producció
 
     if($cardInscriptionResponse->status == 'succeeded'){
       $subscriptionResponse = $this->subscribeCustomerToPlan($qvoCustomerID, $qvoPlanID);
-      return response()->json($subscriptionResponse);
+      return redirect('subscription/success/'.$subscriptionResponse->id);
     }
     else {
-      return response()->json($cardInscriptionResponse);
+      $errorMessage = $cardInscriptionResponse->error;
+      return view('subscription', ['plans' => $this->qvoPlans(), 'notice' => $errorMessage]);
     }
   }
 
