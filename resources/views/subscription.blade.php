@@ -4,7 +4,7 @@
   <span class="page-title">Ejemplo: <strong>Planes y suscripciones</strong></span>
 @stop
 @section('content')
-  <form method="POST" action="subscription/init">
+  <form method="POST" action="/subscription/init">
     {{ csrf_field() }}
     <h1>1. Ingresa tus datos:</h1>
     <div class="form-group">

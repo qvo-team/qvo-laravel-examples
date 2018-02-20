@@ -40,7 +40,7 @@
   <p>Respuesta de la API:</p>
   <pre data-src="prism.js" class='language-javascript'>
 <code>
-{{json_encode($response, JSON_PRETTY_PRINT)}}
+{{ json_encode($response, JSON_PRETTY_PRINT) }}
 </code>
   </pre>
 @stop

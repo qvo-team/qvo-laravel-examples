@@ -13,7 +13,7 @@
       <div class="product-rating">★★★★</div>
       <div class="product-price">${{ $product['price'] }}</div>
       <p class="product-description">{{ $product['description'] }}</p>
-      <form method="POST" action="charge/pay">
+      <form method="POST" action="/charge/pay">
         {{ csrf_field() }}
         <input type="hidden" name="amount" value="{{ $product['price'] }}"><button class="btn btn-primary" type="submit">
           Pagar ${{ $product['price'] }}

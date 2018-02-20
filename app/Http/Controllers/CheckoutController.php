@@ -11,8 +11,6 @@ class CheckoutController extends Controller
     "id" => 2,
     "name" => "Zapatillas Clásicas",
     "price" => 45900,
-    "rating" => 4,
-    "offer" => false,
     "img_path" => 'images/shoe.png',
     "description" =>
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium cumque asperiores illum, dolores totam nostrum eum ducimus facilis, fuga possimus, temporibus ipsa quia nobis consequuntur voluptas libero? Amet, nam magnam."

@@ -99,7 +99,7 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ'; // Reemplazar por el token de producció
 
     if($cardInscriptionResponse->status == 'succeeded'){
       $subscriptionResponse = $this->subscribeCustomerToPlan($qvoCustomerID, $qvoPlanID);
-      return redirect('subscription/success/'.$subscriptionResponse->id);
+      return redirect('/subscription/success/'.$subscriptionResponse->id);
     }
     else {
       $errorMessage = $cardInscriptionResponse->error;
@@ -153,7 +153,7 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ'; // Reemplazar por el token de producció
 
     $response = json_decode($body);
 
-    return view('success', ['response' => $response]);
+    return view('subscription_success', ['response' => $response]);
   }
 }
 

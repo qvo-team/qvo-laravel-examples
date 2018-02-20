@@ -13,8 +13,6 @@ class ChargeController extends Controller
     "id" => 2,
     "name" => "Polera de Basquetball",
     "price" => 25990,
-    "rating" => 4,
-    "offer" => false,
     "img_path" => 'images/basketball-jersey.png',
     "description" =>
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium cumque asperiores illum, dolores totam nostrum eum ducimus facilis, fuga possimus, temporibus ipsa quia nobis consequuntur voluptas libero? Amet, nam magnam."
@@ -40,14 +38,43 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ';
   private function initTransaction($amount)
   {
     $guzzleClient = new Client();
-    $charge_url = self::QVO_API_URL."/webpay_plus/charge";
+    $chargeURL = self::QVO_API_URL."/webpay_plus/charge";
 
     $body = $guzzleClient->request('POST',
-      $charge_url, [
+      $chargeURL, [
         'json' => [
           'amount' => $amount,
           'return_url' => 'http://localhost:8000/charge/return_after_form'
         ],
+        'headers' => [
+          'Authorization' => 'Bearer '.self::QVO_API_TOKEN
+        ],
+        'http_errors' => false
+      ]
+    )->getBody();
+
+    return json_decode($body);
+  }
+
+  public function returnAfterForm(Request $request)
+  {
+    $transactionID = (string)$request['transaction_id'];
+    $getTransactionResponse = $this->getTransaction($transactionID);
+    if ($getTransactionResponse->status == 'successful') {
+      return view('charge_success', ['response' => $getTransactionResponse]);
+    }
+    else {
+      return view('charge', ['product' => self::PRODUCT, 'notice' => $getTransactionResponse->status]);
+    }
+  }
+
+  private function getTransaction($transactionID)
+  {
+    $guzzleClient = new Client();
+    $getTransactionURL = self::QVO_API_URL."/transactions/".$transactionID;
+
+    $body = $guzzleClient->request('GET',
+      $getTransactionURL, [
         'headers' => [
           'Authorization' => 'Bearer '.self::QVO_API_TOKEN
         ],
