@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 
 class CheckoutController extends Controller
 {
-  const PRODUCT = array(
+  private const PRODUCT = array(
     "id" => 2,
     "name" => "Zapatillas Clásicas",
     "price" => 45900,
@@ -18,16 +18,16 @@ class CheckoutController extends Controller
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium cumque asperiores illum, dolores totam nostrum eum ducimus facilis, fuga possimus, temporibus ipsa quia nobis consequuntur voluptas libero? Amet, nam magnam."
   );
 
-  const QVO_API_URL = 'https://playground.qvo.cl'; //Change it to https://api.qvo.cl on production
-  const QVO_API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21tZXJjZV9pZCI6ImNvbV9xdFM0Z3JvbV9BZk5oQXo2REFvMnl3IiwiYXBpX3Rva2VuIjp0cnVlfQ.sM047UoHi52rXNmE7nJModcudpZ1GoZ_71FV2oVpCxU
+  private const QVO_API_URL = 'https://playground.qvo.cl'; //Change it to https://api.qvo.cl on production
+  private const QVO_API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21tZXJjZV9pZCI6ImNvbV9xdFM0Z3JvbV9BZk5oQXo2REFvMnl3IiwiYXBpX3Rva2VuIjp0cnVlfQ.sM047UoHi52rXNmE7nJModcudpZ1GoZ_71FV2oVpCxU
 QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ';
 
-  function index()
+  public function checkout()
   {
     return view('checkout', ['product' => self::PRODUCT]);
   }
 
-  function registerTransaction($transaction_id)
+  public function registerTransaction($transaction_id)
   {
     $client = new Client(); //GuzzleHttp\Client
 

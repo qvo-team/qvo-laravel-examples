@@ -1,7 +1,7 @@
 @extends('examples_layout')
 
 @section('sidebar')
-  <span class="page-title">Ejemplo: <strong>Suscripción</strong></span>
+  <span class="page-title">Ejemplo: <strong>Planes y suscripciones</strong></span>
 @stop
 @section('content')
   <form method="POST" action="subscription/init">
