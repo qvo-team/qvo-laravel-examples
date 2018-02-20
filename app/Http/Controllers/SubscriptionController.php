@@ -13,24 +13,34 @@ class SubscriptionController extends Controller
   private const QVO_API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21tZXJjZV9pZCI6ImNvbV9xdFM0Z3JvbV9BZk5oQXo2REFvMnl3IiwiYXBpX3Rva2VuIjp0cnVlfQ.sM047UoHi52rXNmE7nJModcudpZ1GoZ_71FV2oVpCxU
 QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ'; // Reemplazar por el token de producción cuando quieras pasar a producción
 
+  private const QVO_PLANS = [
+    [
+      "id" => "plata",
+      "name" => "Plata",
+      "price" => "2.45",
+      "currency" => "UF",
+      "interval" => "month",
+      "interval_count" => 1,
+      "default_cycle_count" => null,
+      "trial_period_days" => 0,
+      "status" => "active"
+    ],
+    [
+      "id" => "oro",
+      "name" => "Oro",
+      "price" => "5.9",
+      "currency" => "UF",
+      "interval" => "month",
+      "interval_count" => 1,
+      "default_cycle_count" => null,
+      "trial_period_days" => 0,
+      "status" => "active"
+    ]
+  ];
+
   public function subscription()
   {
-    return view('subscription', ['plans' => $this->qvoPlans()]);
-  }
-
-
-  private function qvoPlans()
-  {
-    $guzzleClient = new Client();
-
-    $plans_url = self::QVO_API_URL.'/plans';
-    $body = $guzzleClient->request('GET', $plans_url, [
-      'headers' => [
-        'Authorization' => 'Bearer '.self::QVO_API_TOKEN
-      ]
-    ])->getBody();
-
-    return json_decode($body);
+    return view('subscription', ['plans' => self::QVO_PLANS]);
   }
 
   public function init(Request $request)
@@ -39,7 +49,7 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ'; // Reemplazar por el token de producció
 
     if(isset($qvoCreateCustomerResponse->error)) {
       $errorMessage = $qvoCreateCustomerResponse->error->message;
-      return view('subscription', ['plans' => $this->qvoPlans(), 'notice' => $errorMessage]);
+      return view('subscription', ['plans' => self::QVO_PLANS, 'notice' => $errorMessage]);
     }
     else {
       $qvoInitCardInscriptionResponse = $this->initCardInscription($qvoCreateCustomerResponse->id, $request->input('qvo_plan_id'));
@@ -103,7 +113,7 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ'; // Reemplazar por el token de producció
     }
     else {
       $errorMessage = $cardInscriptionResponse->error;
-      return view('subscription', ['plans' => $this->qvoPlans(), 'notice' => $errorMessage]);
+      return view('subscription', ['plans' => self::QVO_PLANS, 'notice' => $errorMessage]);
     }
   }
 
@@ -154,6 +164,20 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ'; // Reemplazar por el token de producció
     $response = json_decode($body);
 
     return view('subscription_success', ['response' => $response]);
+  }
+
+  private function qvoPlans()
+  {
+    $guzzleClient = new Client();
+
+    $plans_url = self::QVO_API_URL.'/plans';
+    $body = $guzzleClient->request('GET', $plans_url, [
+      'headers' => [
+        'Authorization' => 'Bearer '.self::QVO_API_TOKEN
+      ]
+    ])->getBody();
+
+    return json_decode($body);
   }
 }
 

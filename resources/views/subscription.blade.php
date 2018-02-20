@@ -25,13 +25,13 @@
         <div class="plan">
           <div class="plan-content">
             <h1 class="plan-price">
-              <span class="currency">{{ $plan->currency }}</span>
-              {{ $plan->price }}
+              <span class="currency">{{ $plan['currency'] }}</span>
+              {{ $plan['price'] }}
               <span class="interval">/mes</span>
             </h1>
-            <p class="plan-name">{{ $plan->name }}</p>
+            <p class="plan-name">{{ $plan['name'] }}</p>
           </div>
-          <button class="btn btn-primary" name="qvo_plan_id" type="submit" value="{{ $plan->id }}">Inscribirse</button>
+          <button class="btn btn-primary" name="qvo_plan_id" type="submit" value="{{ $plan['id'] }}">Inscribirse</button>
         </div>
       @endforeach
     </div>
