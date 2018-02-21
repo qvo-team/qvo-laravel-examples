@@ -19,7 +19,7 @@ Los ejemplos incluidos son:
 
 La aplicación viene previamente configurada con credenciales para realizar pruebas de inmediato, pero puedes cambiarlas por tus propias credenciales en el archivo modificando la constante QVO_API_TOKEN de cada controlador.
 
-> **OJO 👀:** Si utilizas las credenciales de tu cuenta y estas probando suscripciones, preocúpate que los planes (QVO_PLANS) usados en SubscriptionController coincidan con los planes creados en tu cuenta.
+> **OJO 👀:** Si utilizas las credenciales de tu cuenta y estas probando suscripciones, debes reemplazar los planes (QVO_PLANS) usados en SubscriptionController por los planes de tu cuenta.
 
 Para realizar pagos de prueba utiliza las credenciales provistas en [nuestra documentación](https://docs.qvo.cl/#pruebas-y-sandbox).
 
