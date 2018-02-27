@@ -30,6 +30,10 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ';
   public function pay(Request $request)
   {
     $amount = $request['amount'];
+
+    if((int)$amount != self::PRODUCT['price'])
+      throw new Exception('Charged amount must match product price');
+
     $initTransactionResponse = $this->initTransaction($amount);
 
     return Redirect::away($initTransactionResponse->redirect_url);
@@ -37,6 +41,7 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ';
 
   private function initTransaction($amount)
   {
+
     $guzzleClient = new Client();
     $chargeURL = self::QVO_API_URL."/webpay_plus/charge";
 
