@@ -10,8 +10,7 @@ use GuzzleHttp\Client; // Instalado con composer, ver composer.json
 class SubscriptionController extends Controller
 {
   private const QVO_API_URL = 'https://playground.qvo.cl'; // Reemplazar por https://api.qvo.cl en producción
-  private const QVO_API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21tZXJjZV9pZCI6ImNvbV9xdFM0Z3JvbV9BZk5oQXo2REFvMnl3IiwiYXBpX3Rva2VuIjp0cnVlfQ.sM047UoHi52rXNmE7nJModcudpZ1GoZ_71FV2oVpCxU
-QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ'; // Reemplazar por el token de producción cuando quieras pasar a producción
+  private const QVO_API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21tZXJjZV9pZCI6ImNvbV9xdFM0Z3JvbV9BZk5oQXo2REFvMnl3IiwiYXBpX3Rva2VuIjp0cnVlfQ.sM047UoHi52rXNmE7nJModcudpZ1GoZ_71FV2oVpCxU'; // Reemplazar por el token de producción cuando quieras pasar a producción
 
   private const QVO_PLANS = [
     [
@@ -120,9 +119,9 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ'; // Reemplazar por el token de producció
   function checkCardInscription($qvoCustomerID, $uid)
   {
     $guzzleClient = new Client();
-    $check_card_inscription_url = self::QVO_API_URL."/customers/".$qvoCustomerID."/cards/inscriptions/".$uid;
+    $checkCardInscriptionURL = self::QVO_API_URL."/customers/".$qvoCustomerID."/cards/inscriptions/".$uid;
 
-    $body = $guzzleClient->request('GET', $check_card_inscription_url, [
+    $body = $guzzleClient->request('GET', $checkCardInscriptionURL, [
       'headers' => [
         'Authorization' => 'Bearer '.self::QVO_API_TOKEN
       ]
