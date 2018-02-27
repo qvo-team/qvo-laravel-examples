@@ -85,7 +85,7 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ'; // Reemplazar por el token de producció
   {
     $guzzleClient = new Client();
     $initCardInscriptionURL = self::QVO_API_URL.'/customers/'.$qvoCustomerID.'/cards/inscriptions';
-    $returnURL = "http://localhost:8000/subscription/card_inscription_return?qvo_plan_id=".$qvoPlanID."&qvo_customer_id=".$qvoCustomerID;
+    $returnURL = url("/subscription/card_inscription_return?qvo_plan_id=".$qvoPlanID."&qvo_customer_id=".$qvoCustomerID);
 
     $body = $guzzleClient->request('POST', $initCardInscriptionURL, [
       'json' => [

@@ -49,7 +49,7 @@ QVO_PUBLIC_KEY=FkZcGOAppvKR6CCVvZI6jQ';
       $chargeURL, [
         'json' => [
           'amount' => $amount,
-          'return_url' => 'http://localhost:8000/charge/return_after_form'
+          'return_url' => url('/charge/return_after_form')
         ],
         'headers' => [
           'Authorization' => 'Bearer '.self::QVO_API_TOKEN
